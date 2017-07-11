@@ -1,13 +1,13 @@
-let request = require('supertest')('https://api.typeform.com/v1');
-let chai = require('chai');
-let expect = chai.expect;
+'use strict';
 
-describe('Typeform Data API basic tests', function() {
+let accountData = require('../testData').getAccountData();
+
+describe('API Key tests', function() {
     it('returns forms for a given API key', function(done) {
-        request
+        typeformDataAPI
             .get('/forms')
             .query({
-                key: 'db0d6fc53f49ad97f0dcad9bd1ae2efdfda14e4c'
+                key: accountData.validAPIKey
             })
             .expect(200)
             .expect('Content-Type', /json/)
@@ -15,10 +15,10 @@ describe('Typeform Data API basic tests', function() {
             .end(done);
 
         function schemaValidationToBeCorrect(res) {
-            expect(res.body).to.be.an('array');
+            chai.expect(res.body).to.be.an('array');
             res.body.forEach(form => {
-                expect(form).to.have.property('id').that.is.a('string');
-                expect(form).to.have.property('name').that.is.a('string');
+                chai.expect(form).to.have.property('id').that.is.a('string');
+                chai.expect(form).to.have.property('name').that.is.a('string');
             });
         }
     });

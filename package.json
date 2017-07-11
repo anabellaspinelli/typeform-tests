@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha tests"
+    "test": "mocha tests --timeout 5000"
   },
+  "main": "tests/acceptance/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com-anabellaspinelli:anabellaspinelli/typeform-tests.git"
@@ -17,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.0.2",
+    "fs": "0.0.1-security",
     "mocha": "^3.4.2",
     "supertest": "^3.0.0"
   }
