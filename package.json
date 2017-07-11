@@ -1,0 +1,23 @@
+{
+  "name": "typeform-tests",
+  "version": "1.0.0",
+  "description": "POC typeform API tests",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-anabellaspinelli:anabellaspinelli/typeform-tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "supertest": "^3.0.0"
+  }
+}
