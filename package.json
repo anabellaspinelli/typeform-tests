@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha tests --timeout 5000 --reporter mochawesome"
+    "testReport": "mocha test --opts test/report.opts",
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
