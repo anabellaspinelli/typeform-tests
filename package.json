@@ -2,14 +2,13 @@
   "name": "typeform-tests",
   "version": "1.0.0",
   "description": "POC typeform API tests",
-  "main": "index.js",
+  "main": "tests/acceptance/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha tests --timeout 5000"
+    "test": "mocha tests --timeout 5000 --reporter mochawesome"
   },
-  "main": "tests/acceptance/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com-anabellaspinelli:anabellaspinelli/typeform-tests.git"
@@ -20,6 +19,7 @@
     "chai": "^4.0.2",
     "fs": "0.0.1-security",
     "mocha": "^3.4.2",
+    "mochawesome": "^2.3.0",
     "supertest": "^3.0.0"
   }
 }
