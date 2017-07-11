@@ -60,3 +60,6 @@ typings/
 # idea project files
 .idea/*
 
+# mochawesome report dir
+mochawesome-report
+
