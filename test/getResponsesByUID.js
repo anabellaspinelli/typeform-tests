@@ -4,19 +4,20 @@ let utils = require('./utils');
 let addContext = require('mochawesome/addContext');
 
 const ACCOUNT_DATA = require('./testData').getAccountData();
+const INVALID_DATA = require('./testData').getInvalidData();
 
 describe('/form by UID tests', function() {
-    it('returns data and responses for a given UID', function (done) {
+    it('should return data and responses for a given UID', function (done) {
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA.registrationFormUID}`)
-            .query({ key: ACCOUNT_DATA.validAPIKey })
+            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .query({ key: ACCOUNT_DATA[0].VALID_API_KEY })
             .expect(200)
             .expect('Content-Type', /json/)
-            .expect(schemaValidationToBeCorrect)
+            .expect(schemaToBeCorrect)
             .expect(res => { utils.report.showServerResponseBody(res, this); })
             .end(done);
 
-        function schemaValidationToBeCorrect(res) {
+        function schemaToBeCorrect(res) {
             chai.expect(res.body).to.have.property('http_status').that.is.a('number');
 
             // Form responses stats
@@ -46,11 +47,25 @@ describe('/form by UID tests', function() {
         }
     });
 
-    it('returns 403 error requesting form with invalid API Key', function (done) {
+    it('should return 404 error requesting an invalid form UID', function (done) {
         typeformDataAPI
-            .get('/form/B930Qx')
+            .get(`/form/${ACCOUNT_DATA.registrationFormUID}`)
             .query({
-                key: 'invalidKey'
+                key: ACCOUNT_DATA[0].VALID_API_KEY
+            })
+            .expect(404)
+            .expect('Content-Type', /json/)
+            .expect({ message: 'typeform with uid undefined was not found', status: 404 })
+
+            .expect(res => { utils.report.showServerResponseBody(res, this); })
+            .end(done);
+    });
+
+    it('should return 403 error requesting a valid form UID with invalid API Key', function (done) {
+        typeformDataAPI
+            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .query({
+                key: INVALID_DATA.INVALID_API_KEY
             })
             .expect(403)
             .expect('Content-Type', /json/)
@@ -58,4 +73,18 @@ describe('/form by UID tests', function() {
             .expect(res => { utils.report.showServerResponseBody(res, this); })
             .end(done);
     });
+
+    it('should return 403 error requesting a valid form UID with an unauthorized but valid API Key', function (done) {
+        typeformDataAPI
+            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .query({
+                key: ACCOUNT_DATA[1].VALID_API_KEY
+            })
+            .expect(403)
+            .expect('Content-Type', /json/)
+            .expect({ message: 'please provide a valid API key', status: 403 })
+            .expect(res => { utils.report.showServerResponseBody(res, this); })
+            .end(done);
+    });
+
 });

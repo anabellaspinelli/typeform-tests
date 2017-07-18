@@ -1,7 +1,7 @@
 {
   "name": "typeform-tests",
   "version": "1.0.0",
-  "description": "POC typeform API tests",
+  "description": "Typeform Data API tests",
   "main": "tests/acceptance/index.js",
   "directories": {
     "test": "test"

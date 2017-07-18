@@ -9,9 +9,9 @@ describe('apply filters to form responses', function() {
         const LIMIT = 2;
 
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA.registrationFormUID}`)
+            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
             .query({
-                key: ACCOUNT_DATA.validAPIKey,
+                key: ACCOUNT_DATA[0].VALID_API_KEY,
                 limit: LIMIT
             })
             .expect(200)
