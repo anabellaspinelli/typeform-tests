@@ -28,7 +28,7 @@ describe('Get forms for an API key', function() {
     });
 });
 
-describe('Get form for an API key - NEGATIVE', function(done) {
+describe('Get forms for an API key - NEGATIVE', function(done) {
     it('should return 403 when requesting forms with an invalid API key', function(done) {
         typeformDataAPI
             .get('/forms')

@@ -9,7 +9,7 @@ const INVALID_DATA = require('./testData').getInvalidData();
 describe('Form responses by UID', function() {
     it('should return data and responses for a given UID', function (done) {
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .get(`/form/${ACCOUNT_DATA[0].VALID_FORM_UID}`)
             .query({key: ACCOUNT_DATA[0].VALID_API_KEY})
             .expect(res => {
                 utils.report.showServerResponseBody(res, this);
@@ -67,7 +67,7 @@ describe('Form responses by UID - NEGATIVE', function() {
 
     it('should return 403 error requesting a valid form UID with invalid API Key', function (done) {
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .get(`/form/${ACCOUNT_DATA[0].VALID_FORM_UID}`)
             .query({
                 key: INVALID_DATA.INVALID_API_KEY
             })
@@ -80,7 +80,7 @@ describe('Form responses by UID - NEGATIVE', function() {
 
     it('should return 403 error requesting a valid form UID with a different user API Key', function (done) {
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .get(`/form/${ACCOUNT_DATA[0].VALID_FORM_UID}`)
             .query({
                 key: ACCOUNT_DATA[1].VALID_API_KEY
             })
@@ -93,7 +93,7 @@ describe('Form responses by UID - NEGATIVE', function() {
 
     it('should return 403 error requesting a valid form UID the owners old API key', function (done) {
         typeformDataAPI
-            .get(`/form/${ACCOUNT_DATA[0].FORM_UID}`)
+            .get(`/form/${ACCOUNT_DATA[0].VALID_FORM_UID}`)
             .query({
                 key: ACCOUNT_DATA[0].OLD_API_KEY
             })
